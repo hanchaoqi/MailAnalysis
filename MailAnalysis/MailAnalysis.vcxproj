@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{323EF63A-F6A0-492D-A48D-BDA5C8EB0A71}</ProjectGuid>
+    <ProjectGuid>{6DC12D00-193E-4355-9DCF-787702F983F7}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>MailAnalysis</RootNamespace>
   </PropertyGroup>

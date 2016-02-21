@@ -28,6 +28,7 @@ struct Mail_file{
 int is_prefix(const string& s, const string& p);
 bool find_from_addr(const Message* m, string& s);
 string find_subject(const Message& m);
+ostream& operator<<(ostream& os, const Message& m);
 int main()
 {
 	Mail_file mfile("my-mail-file.txt");
@@ -37,13 +38,17 @@ int main()
 		const Message& m = *p;
 		string s;
 		if (find_from_addr(&m, s))
+		{
 			sender.insert(make_pair(s, &m));
+		}
+			
 	}
-
 	typedef multimap<string, const Message*>::const_iterator MCI;
-	pair<MCI, MCI> pp = sender.equal_range("John Doe");
+	pair<MCI, MCI> pp = sender.equal_range("John Doe <jdoe@machine.example>");
+	
 	for (MCI p = pp.first; p != pp.second; ++p)
 	{
+		cout << "hello" << endl;
 		cout << find_subject(*p->second) << '\n';
 	}
 	system("pause");
@@ -92,6 +97,17 @@ string find_subject(const Message& m)
 {
 	for (Line_iter p = m.begin(); p != m.end();++p)
 	if (int n = is_prefix(*p, "Subject: "))
+	{
 		return string(*p, n);
+	}
+		
 	return "";
+}
+ostream& operator<<(ostream& os, const Message& m)
+{
+	string s;
+	for (Line_iter p = m.begin(); p != m.end(); ++p)
+		s += *p + "\n";
+	
+	return os << s;
 }
